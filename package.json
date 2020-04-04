@@ -1,0 +1,23 @@
+{
+  "name": "cc-cedict-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "pinyin-tone-convert": "0.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harryli0088/CC-CEDICT.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harryli0088/CC-CEDICT/issues"
+  },
+  "homepage": "https://github.com/harryli0088/CC-CEDICT#readme"
+}
