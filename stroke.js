@@ -2,12 +2,19 @@ const fs = require('fs');
 const chineseOutput = require("./chineseOutput.json")
 
 const strokes = {}
+const yFlip = 900
 
 Object.keys(chineseOutput.map).forEach(key => {
   if(key.length === 1) {
     try {
       const strokeData = require('hanzi-writer-data/'+key);
-      strokes[key] = flipStrokeData(strokeData.strokes)
+      strokeData.strokes = flipStrokeData(strokeData.strokes)
+      strokeData.medians.forEach(s => {
+        s.forEach(dots => {
+          dots[1] = yFlip - dots[1]
+        })
+      })
+      strokes[key] = strokeData
       console.log("success", key)
     }
     catch(err) {
@@ -27,7 +34,6 @@ fs.writeFile(
   }
 );
 
-
 function flipStrokeData(strokes) {
   strokes.forEach((d,i) => {
     const split = d.split(" ")
@@ -37,7 +43,7 @@ function flipStrokeData(strokes) {
       if(!isNaN(parsed)) {
         ++mod
         if(mod%2 === 0) {
-          split[j] = (900 - parsed).toString()
+          split[j] = (yFlip - parsed).toString()
         }
       }
     })
