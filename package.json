@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "curve-matcher": "^1.1.1",
     "hanzi-writer-data": "^2.0.1",
     "pinyin-tone-convert": "0.0.2"
   },
