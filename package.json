@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "hanzi-writer-data": "^2.0.1",
     "pinyin-tone-convert": "0.0.2"
   },
   "devDependencies": {},
