@@ -12,39 +12,42 @@ function readModuleFile(path, callback) {
 
 
 
-// [
-//   "./hsk1-vocab.txt",
-//   "./hsk2-vocab.txt",
-//   "./hsk3-vocab.txt",
-//   "./hsk4-vocab.txt",
-//   "./hsk5-vocab.txt",
-//   "./hsk6-vocab.txt",
-// ].forEach(fileName => {
-//   readModuleFile(fileName, function (err, hsk) {
-//     countVocabInDictionary(hsk, fileName)
-//   });
-// })
+[
+  "./hsk1-vocab.txt",
+  "./hsk2-vocab.txt",
+  "./hsk3-vocab.txt",
+  "./hsk4-vocab.txt",
+  "./hsk5-vocab.txt",
+  "./hsk6-vocab.txt",
+].forEach(fileName => {
+  readModuleFile(fileName, function (err, hsk) {
+    countInDictionary(hsk, fileName)
+    // formatVocab(hsk, fileName)
+  });
+})
 
 
-function countVocabInDictionary(hsk, fileName) {
+function countInDictionary(hsk, fileName) {
   let count = 0
   const hskSplit = hsk.split("\n")
   hskSplit.forEach(line => {
-    const lineSplit = line.trim().split(" ")
-    if(lineSplit.length > 0) {
-      if(typeof dictionary.map[ lineSplit[1] ] === "number") {
-        count++
-      }
-      // else {
-      //   console.log("second split wasn't a number", line.trim())
-      // }
+    if(typeof dictionary.map[ line.trim() ] === "number") {
+      count++
     }
   })
 
-  const total = hskSplit.length-1
+  const total = hskSplit.length
 
   console.log(fileName, "count", count, total, count/total)
 }
+
+// function formatVocab(hsk, fileName) {
+//   const format = hsk.trim().split("\n").map(line => line.trim().split(" ")[1]).join("\n")
+//
+//   console.log(fileName)
+//   console.log(format)
+//   fs.writeFile("."+fileName.slice(5), format, () => {});
+// }
 
 
 [
@@ -56,27 +59,16 @@ function countVocabInDictionary(hsk, fileName) {
   "./hsk6-characters.txt",
 ].forEach(fileName => {
   readModuleFile(fileName, function (err, hsk) {
-    countCharactersInDictionary(hsk, fileName)
+    countInDictionary(hsk, fileName)
+    // formatCharacters(hsk, fileName)
   });
 })
 
-
-function countCharactersInDictionary(hsk, fileName) {
-  let count = 0
-  const hskSplit = hsk.split(" ")
-  hskSplit.forEach(str => {
-    const character = str.trim()
-    if(character.length === 1) {
-      if(typeof dictionary.map[ character ] === "number") {
-        count++
-      }
-    }
-    else if(character.length > 0) {
-      console.log("This string had more than on character", character)
-    }
-  })
-
-  const total = hskSplit.length
-
-  console.log(fileName, "count", count, total, count/total)
-}
+// function formatCharacters(hsk, fileName) {
+//   const format = hsk.trim().split(" ").map(char => char.trim()).join("\n")
+//
+//   console.log(fileName)
+//   console.log(format)
+//
+//   fs.writeFile("."+fileName.slice(5), format, () => {});
+// }
