@@ -46,8 +46,18 @@ readModuleFile('./cedict_ts.u8', function (err, file) {
         }
       }
 
-      map[traditional] = parsed.length
-      map[simplified] = parsed.length
+      if(map[traditional] === undefined) {
+        map[traditional] = []
+      }
+      map[traditional].push(parsed.length)
+
+      //if the traditional and simplified characters are different
+      if(traditional !== simplified) {
+        if(map[simplified] === undefined) {
+          map[simplified] = []
+        }
+        map[simplified].push(parsed.length)
+      }
 
       parsed.push([traditional, simplified, pinyin, tonePinyin, english])
     }
